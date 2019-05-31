@@ -1,0 +1,67 @@
+{{ partial "head.html" . }}
+{{ partial "header.html" . }}
+<main>
+  <section id="hero">
+    <div id="hero-background">
+    </div>
+    <div id="hero-content" class="container-lg text-center">
+      <h1>At auctor urna nunc.</h1>
+      <h4>Cras fermentum odio eu feugiat pretium nibh ipsum consequat nisl vel pretium lectus quam id.</h4>
+      <a href="#" class="button">Get in touch</a>
+    </div>
+    <div id="hero-graphic">
+      {{ partial "hero-graphic-svg.html" . }}
+    </div>
+    <div id="hero-fade">
+    </div>
+  </section>
+  <div id="hero-white-space">
+  </div> 
+  <section id="runs-on">
+    <div class="container-lg grid">
+        {{ partial "runs-on-svg.html" . }}
+      <!--<div class="crestron-text flex">
+        <h4>As a Crestron Services Provider, we are renowned for beautiful UI, clean code, and finished projects. We work with integrators and end-users to provide elegant, approachable interfaces for residences and organizations.</h4>
+      </div>-->
+    </div>
+  </section>
+  <section id="features">
+    <div class="container-lg grid">
+      <div class="feature flex">
+        <div class="feature-graphic">
+        </div>
+        <div>
+          <h4>Lobortis elementum</h4>
+          <p>Elit eget gravida cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus.</p>
+        </div>
+      </div>
+      <div class="feature flex">
+        <div class="feature-graphic">
+        </div>
+        <div>
+          <h4>Mattis vulputate enim</h4>
+          <p>Elit eget gravida cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus.</p>
+        </div>
+      </div>
+      <div class="feature flex">
+        <div class="feature-graphic">
+        </div>
+        <div>
+          <h4>Rutrum quisque</h4>
+          <p>Elit eget gravida cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus.</p>
+        </div>
+      </div>
+      <div class="feature flex">
+        <div class="feature-graphic">
+        </div>
+        <div>
+          <h4>Aliquam id diam</h4>
+          <p>Elit eget gravida cum sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus.</p>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+{{ partial "footer.html" . }}

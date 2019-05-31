@@ -1,0 +1,568 @@
+@import "colors";
+@import "hamburgers";
+@import "reset";
+
+{{ $styles := resources.Get "scss/main.scss" | toCSS | postCSS | minify | fingerprint }}
+
+
+/* Universal Styles
+   ========================================================================== */
+
+html {
+  -ms-text-size-adjust: 100%; /* 2 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+body {
+  background: white;
+  font-family: 'Avenir Next', -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  color: $heading-black;
+  line-height: 1.5;
+  min-height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  font-weight: 400;
+  font-style: normal;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  margin: 0;
+}
+
+footer,
+header,
+nav,
+section {
+  display: block;
+}
+
+main {
+  flex-grow: 1;
+  position: relative;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+h1 {
+  margin: 0 0 16px;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 48px;
+  color: $heading-black;
+}
+
+h2 {
+  margin: 0 0 12px;
+  font-size: 32px;
+  font-weight: 600;
+  color: $heading-black;
+}
+
+h3 {
+  margin: 0 0 12px;
+  font-size: 24px;
+  font-weight: 600;
+  color: $heading-black;
+}
+
+h4 {
+  margin: 0 0 18px;
+  font-size: 18px;
+  font-weight: 600;
+  color: $heading-black;
+}
+
+p {
+  margin: 0 0; 
+  line-height: 24px;
+  color: $paragraph-gray;
+}
+
+a {
+  color: $heading-black;
+  text-decoration: none;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  font-weight: 600;
+  ::hover {
+    color: $light-blue;
+  }
+}
+
+a.link-arrow {
+  &:after {
+    content: '';
+    display: inline-block;
+    height: 10px;
+    width: 32px;
+    background: url("data:image/svg+xml;utf8,<?xml version='1.0' encoding='utf-8'?><svg id='arrow-green' data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' width='32' height='10' viewBox='0 0 32 10'><title>arrow-green</title><path d='M32,5,27,0V4.25H1a.75.75,0,0,0,0,1.5H27V10Z' style='fill:#1db896'/></svg>") no-repeat;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 0 0 0 12px;
+  }
+}
+
+a.button {
+  padding: 8px 32px;
+  border: 0px;
+  border-radius: 100px;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: white;
+  background-color: $primary-blue;
+}
+
+.text-center {
+  text-align: center;
+}
+
+div {
+  display: block;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+main {
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.container-lg {
+  margin: 0 auto;
+  padding: 0 16px;
+  width: 100%;
+  max-width: 1040px;
+}
+
+.grid {
+  display: grid;
+}
+
+.flex {
+  display: flex;
+}
+
+
+/* Header
+   ========================================================================== */
+
+nav {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+#global-nav {
+  position: fixed;
+  background-color: transparent;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  height: 72px;
+  transition: top 0.3s;
+  a {
+    color: white;
+  }
+  .nav-links a {
+      margin-left: 32px;
+  }
+}
+
+.nav-right {
+  display: flex;
+}
+
+#global-nav .nav-links {
+  display: none;
+}
+@media (min-width: 768px) {
+  #global-nav .nav-links {
+    display: flex;
+    align-items: center;
+  } 
+}
+
+#menu-toggle {
+  display: flex;
+  align-self: flex-start;
+}
+@media (min-width: 768px) {
+  #menu-toggle {
+    display: none;
+  } 
+}
+
+.menu::before {
+  width: 100%;
+  height: 0;
+  background-color: $primary-blue;
+  content: "";
+  position: absolute;
+  z-index: -100;
+  opacity: .5;
+  visibility: hidden;
+  -webkit-transition: .4s ease-in; 
+  transition: .4s ease-in; 
+}
+
+.menu.open::before {
+  height: 100vh;
+  opacity: .95;
+  visibility: visible;
+}
+
+.menu {
+  flex-direction: column;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  display: flex;
+  height: 0px;
+  width: 100%;
+  text-align: center;
+  div {
+    opacity: 0;
+    visibility: hidden;
+    margin: 24px 0;
+    a {
+      font-size: 24px;
+    }
+  }
+  div:first-child {
+    transition: opacity .3s ease-in-out .1s; 
+  }
+  div:nth-child(1n+2) {
+    transition: opacity .3s ease-in-out .2s; 
+  }
+  div:nth-child(1n+3) {
+    transition: opacity .3s ease-in-out .3s; 
+  }
+}
+
+.menu.open {
+  opacity: 1;
+  visibility: visible;
+  position: fixed;
+  div {
+    opacity: 1;
+    visibility: visible;
+  }
+  div:first-child {
+    border-top: 1px solid hsla(200,100%,100%,0.25);
+    padding-top: 72px;
+    margin-top: 72px;
+  }
+}
+
+.wordmark.open, .menu-toggle.open {
+  position: relative;
+
+}
+
+@media (min-width: 768px) {
+  .menu {
+    display: none; /* Temporary fix for menu still appearing after breakpoint */
+  } 
+}
+
+.wordmark {
+  font-weight: 700;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  font-size: 24px;
+}
+
+.wordmark svg {
+  width: 160px;
+  height: auto;
+}
+
+/* SVG Illustrations
+   ========================================================================== */
+
+.svg-fluid {
+  margin: 0 auto;
+  width: 100%;
+  height: auto;
+  position: relative; 
+}
+
+
+/* Hero Graphic
+   ========================================================================== */
+
+#hero {
+  position: relative;
+  z-index: -100;
+  width: 100%;
+  height: auto;
+  background:
+    radial-gradient(ellipse at bottom right, $dark-blue, transparent), 
+    radial-gradient(ellipse at top right, $primary-blue, transparent), 
+    radial-gradient(ellipse at top left, $dark-blue, transparent),
+    radial-gradient(ellipse at bottom center, $dark-blue, transparent),
+    radial-gradient(ellipse at center, $primary-blue, $dark-blue);
+  background-size: 100% 100%;
+  -webkit-animation: Gradient 8s ease infinite;
+  -moz-animation: Gradient 8s ease infinite;
+  animation: Gradient 8s ease infinite;
+}
+@-webkit-keyframes Gradient {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+#hero-fade {
+  position: relative;
+  z-index: 0;
+  height: 200px;
+  margin-top: -200px;
+  background:
+    linear-gradient(transparent, hsla(200,100%,50%,0.25), white);
+}
+@media (min-width: 768px) {
+  #hero-fade {
+    height: 360px;
+    margin-top: -360px;
+  } 
+}
+
+#hero-graphic {
+  position: relative;
+  z-index: 100;
+}
+
+#hero-graphic svg {
+  width: 100%;
+  max-height: 600px;
+  position: relative;
+  bottom: -100px;
+}
+
+/* Hero Text
+   ========================================================================== */
+
+#hero-content {
+  margin-top: 160px;
+  h1 {
+    color: white;
+  }
+  h4 {
+    font-weight: 400;
+    color: white;
+    opacity: 0.8;
+    margin-bottom: 32px;
+  }
+}
+@media (min-width: 768px) {
+  #hero-content {
+    max-width: 50%;
+  }
+}
+
+
+/* White space beneath hero
+   ========================================================================== */
+#hero-white-space {
+  height: 100px;
+}
+
+
+/* Features Section
+   ========================================================================== */
+section#features {
+  margin: 80px 0;
+}
+
+#features .grid {
+  grid-template-columns: 1fr;
+  grid-gap: 64px;
+  grid-column-start: 1;
+}
+@media only screen and (min-width: 768px) {
+  #features .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.feature {
+  align-items: center;
+}
+
+.feature-graphic {
+  min-width: 144px;
+  height: 144px;
+  margin-right: 40px;
+  border-radius: 100px;
+  background-color: #95d6f9;
+}
+
+/* 'RUNS ON' Section
+   ========================================================================== */
+section#runs-on {
+  margin: 80px 0;
+  width: 100%;
+  text-align: center;
+  justify-content: space-between;
+  h4 {
+    font-weight: 400;
+  }
+}
+@media (min-width: 768px) {
+  section#runs-on {
+    margin: 80px auto;
+  }
+}
+
+#runs-on .grid {
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 24px;
+  grid-column-start: 1;
+}
+@media only screen and (min-width: 400px) {
+  #runs-on .grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  /*.crestron-text {
+  grid-column-start: 2;
+  grid-column-end: 8;
+  }*/
+}
+@media only screen and (min-width: 900px) {
+  #runs-on .grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+}
+
+.logo {
+  width: auto;
+  align-items: center;
+  justify-content: center;
+  svg {
+    max-height: 48px;
+    max-width: 48px;
+    width: 100%;
+    fill: $light-gray;
+  }
+}
+
+#crestron.logo a svg {
+    max-width: 56px;
+}
+
+#arduino.logo a svg {
+    max-width: 56px;
+}
+
+#amx.logo a svg {
+    max-width: 88px;
+}
+
+/* CSS Grid
+   ========================================================================== */
+
+@supports (display: grid) { }
+
+
+/* Lists
+   ========================================================================== */
+
+ul {
+  list-style:none;
+  padding: 32px 0 0;
+}
+  @media (min-width: 768px) {
+  ul {
+    margin-top: 168px;
+    padding: 0;
+    border-top: none;
+  } }
+
+li {
+  color: white;
+  font-size: 20px;
+  line-height: 24px;
+  margin: 0 0 24px;
+  &:before {
+    content: '';
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    background: url("data:image/svg+xml;utf8,<?xml version='1.0' encoding='utf-8'?><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><title>bullet-check</title><path d='M8,0a8,8,0,1,0,8,8h0A8,8,0,0,0,8,0Zm4.53,6L6.28,12.27,3.47,9.46A.75.75,0,1,1,4.53,8.4l1.75,1.75L11.47,5a.74.74,0,0,1,1.06,0A.75.75,0,0,1,12.53,6Z' style='fill:#1fc5a0'/></svg>") no-repeat;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 0 16px 0 -1px;;
+  }
+}
+
+
+/* Footer
+   ========================================================================== */
+
+footer {
+  color: white;
+  background-color: $medium-blue;
+  height: 128px; /* the footer's total height */
+  margin: 80px 0 0;
+}
+
+#footer-content {
+  height: 80px; /* height + top/bottom paddding + top/bottom border must add up to footer height */
+  padding: 48px 0;
+  text-align: center;
+}
+
+
+/* Placeholders & Guides
+   ========================================================================== */
+
+.placeholder {
+  background-color: white;
+  height: 400px;
+}
+
+/*div {
+  border: 1px solid red;
+}*/
+
+.lock-scroll {
+  position: fixed; 
+  overflow-y: scroll;
+}

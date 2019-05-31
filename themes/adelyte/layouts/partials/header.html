@@ -1,0 +1,52 @@
+<header id="global-nav">
+  <div class="menu">
+    <div><a href="#">Products</a></div>
+    <div><a href="#">Pricing</a></div>
+    <div><a href="#">Contact</a></div>
+  </div>
+  <div class="container-lg">
+    <nav>
+      <a href="/" class="wordmark">
+        Adelyte
+      </a>
+      <div class="nav-right">
+        <div class="nav-links">
+          <a href="#">Products</a>
+          <a href="#">Pricing</a>
+          <a href="#">Contact</a>
+        </div>
+        <button id="menu-toggle" class="hamburger hamburger--squeeze" type="button" onclick="lockScroll()"><span class="hamburger-box"><span class="hamburger-inner"></span></span>
+        </button>
+      </div>
+    </nav>
+  </div>
+  <script>
+    // Look for .hamburger
+    var hamburger = document.querySelector(".hamburger");
+    var menu = document.querySelector(".menu");
+    var wordmark = document.querySelector(".wordmark");
+    var body = document.querySelector("body");
+    // On click
+    hamburger.addEventListener("click", function() {
+      // Toggle class "is-active"
+      hamburger.classList.toggle("is-active");
+      // Do something else, like open/close menu
+      menu.classList.toggle("open");
+      wordmark.classList.toggle("open");
+      body.classList.toggle("lock-scroll");
+    });
+  </script>
+  <script>
+  var prevScrollpos = window.pageYOffset;
+  window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+    if (prevScrollpos > currentScrollPos) {
+      document.getElementById("global-nav").style.top = "0";
+      document.getElementById("global-nav").style.backgroundColor = "#1342aa";
+    } else {
+      document.getElementById("global-nav").style.top = "-80px";
+    }
+    prevScrollpos = currentScrollPos;
+  }
+  </script>
+</header>
